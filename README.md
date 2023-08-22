@@ -30,9 +30,7 @@
 
 Dual Accounts are currently documented under the Central Credential Provider:
 [Home > Administration > Central Credential Provider > Accounts and Safes > Manage dual accounts](https://docs.cyberark.com/AAM-CP/13.0/en/Content/CP%20and%20ASCP/cv_Managing-Dual-Accounts.htm)
-The steps below map to the steps in documentation. The steps in the slides deviate somewhat from the manual configuration steps in the documentation. But they have the same effect. The [manual configuration steps](https://docs.cyberark.com/AAM-CP/13.0/en/Content/CP%20and%20ASCP/cv_Automatic_dual_account.htm?tocpath=Administration%7CCentral%20Credential%20Provider%7CAccounts%20and%20Safes%7CManage%20dual%20accounts%7C_____1) in the online docs for Self-Hosted PAM also work for Privilege Cloud.
-
-Each step below has its own slide with more detailed instructions.
+The steps described below map to but deviate somewhat from the manual configuration steps in the documentation to better support automation. But they have the same effect. The [manual configuration steps](https://docs.cyberark.com/AAM-CP/13.0/en/Content/CP%20and%20ASCP/cv_Automatic_dual_account.htm?tocpath=Administration%7CCentral%20Credential%20Provider%7CAccounts%20and%20Safes%7CManage%20dual%20accounts%7C_____1) in the online docs for Self-Hosted PAM also work for Privilege Cloud.
 
 **Step 1: “Configure a rotational group platform”**
 A Rotational Group Platform is an Account Group Platform with important differences:
@@ -50,6 +48,8 @@ Account groups are not first-class UI objects in PVWA. They do not have their ow
 
 **Step 4: “Set the index of the group object”**
 The documentation calls for using the Private Ark Client to modify the CurrInd value of a group. Fortunately, this step does not appear necessary, given that you cannot use the Private Ark Client with Privilege Cloud.
+
+Below are more detailed instructions for each step above.
 
 ## Step 1: “Configure a rotational group platform”
 Under Groups, activate the Sample Password Group Platform, export it to a local zipfile & unzip to create two files:
@@ -73,7 +73,13 @@ Replace <Optional /> with the following block:
 <Property Name="DualAccountStatus" />
 </Optional>
 
-Create a zipfile containing the modified .ini and .xml file and import to your Vault.
+Automation:
+ - Copy the .ini and .xml files into the platformlib directory.
+ - Run 1-list-platform-library.sh to ensure it appears in the list.
+ - Run 2-import-from-platformlib.sh to import it into the Vault.
+Manual:
+ - Create a zipfile containing the modified .ini and .xml file and import to your Vault.
+
 Verify the new platform appears under Rotational Groups and the Grace Period value is displayed.
 Click Edit and navigate to Target Account Platform->UI & Workflows->Properties->Optional  and verify the four properties you added are there.
 
