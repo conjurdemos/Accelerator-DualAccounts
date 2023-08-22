@@ -93,22 +93,22 @@ GracePeriod=6<br>
 \<Property Name="DualAccountStatus" /\><br>
 \</Optional\><br>
 
-Add to the platform library:
- - Copy the .ini and .xml files into the platformlib directory.
- - Run 0-list-platform-library.sh to ensure it appears in the list.
- - Run 2-import-from-platformlib.sh to import it into the Vault.
-Manual import:
- - Create a zipfile containing the modified .ini and .xml file and import to your Vault.
+ - Add to the platform library:
+   - Copy the .ini and .xml files into the platformlib directory.
+   - Run 0-list-platform-library.sh to ensure it appears in the list.
+   - Run 2-import-from-platformlib.sh to import it into the Vault.
+ - Manual import:
+   - Create a zipfile containing the modified .ini and .xml file and import to your Vault.
 
-- Verify the new platform appears under Rotational Groups and the Grace Period value is displayed.
-- Click Edit and navigate to:<br>
+  - Verify the new platform appears under Rotational Groups and the Grace Period value is displayed.
+  - Click Edit and navigate to:<br>
   Target Account Platform->UI & Workflows->Properties->Optional<br>
   and verify the four properties you added are there.
 
 ## Step 2: “Configure the object’s platform for dual account support”
- - Export the the target platform to a local zipfile & unzip to create two files:
-<base-platform-id>.ini
-<base-platform-id>.xml
+ - Export the the target platform to a local zipfile & unzip to create two files:<br>
+\<base-platform-id\>.ini<br>
+\<base-platform-id\>.xml<br>
  - Modify the .ini file:<br>
    This is the metadata that governs the behavior for any account created for this platform type:
    - password change/verification/reconciliation parameters, drivers, etc. 
