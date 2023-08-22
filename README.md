@@ -4,8 +4,7 @@
 - Thoroughly document Dual Accounts support in the CyberArk Vault.
 - Provide scripts to automate provisioning of Dual Accounts.
 - Provide guidance for adding new platforms for Dual Account automation.
-- Here is a [detailed explanation for the motivation of Dual Accounts].
-  - (https://github.com/conjurdemos/Accelerator-DualAccounts#why-are-dual-accounts-necessary)
+- Here is a [detailed explanation for the motivation of Dual Accounts](https://github.com/conjurdemos/Accelerator-DualAccounts#why-are-dual-accounts-necessary).
 
 ## Prerequisites
  - A demo host to run the scripts in this repo: a MacOS or Linux VM environment with bash shell support, jq installed and IPV4 network access to the CyberArk PVWA APIs.
