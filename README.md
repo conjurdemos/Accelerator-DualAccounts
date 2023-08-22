@@ -28,11 +28,11 @@
 The scripts in this Dual Accounts Accelerator automate tasks required to create Dual Accounts in Self-Hosted or Privilege Cloud vaults. The Accelerator provides out-of-box support for the Platforms in the ./platformlib directory (the “Platform Library”). Support for other Platforms can be added following Step 2 in in the manual configuration steps below.
 
 ### 1) Edit environment variables:
-  - env-vars.sh - defines Self-Host or Privilege Cloud mode and URLs to their installation. If not already set, it also prompts for the name and password of the Vault admin user identity under which to run the scripts.
+  - env-vars.sh - defines Self-Hosted or Privilege Cloud mode and URLs to their installation. If not already set, it also prompts for the name and password of the CyberArk admin user identity under which to run the scripts.
 
 ### 2) Check and update the platform library
  - 0-list-platform-library.sh - lists all platform IDs and system types currently in the platformlib directory. Any platform ID listed can be used to automate dual account creation.
- - 1-export-all-db-platforms.sh - example script showing how to export all platforms of a given system type. As written, the script exports all DB platforms, but can be modified as needed to export platforms of other system types to zipfiles. They can then be unzipped and edited following the manual configuration steps below to implement dual account automation for other platforms.
+ - 1-export-all-db-platforms.sh - example script showing how to export all platforms of a given system type. As written, the script exports all DB platforms, but can be modified as needed to export platforms of other system types to zipfiles. They can then be unzipped and edited following the [manual configuration steps](https://github.com/conjurdemos/Accelerator-DualAccounts#step-2-configure-the-objects-platform-for-dual-account-support) below to implement dual account automation for other platforms.
 
 ### 3) Edit dual account parameters:
   - dual-account-params.sh - **Must be edited** to provide specific values for safe, account names, properties, etc.
