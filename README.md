@@ -120,17 +120,17 @@ Policy-\<base-platform-id\>.xml<br>
 \<Property Name="Index" Type="Numeric"/\><br>
 \<Property Name="DualAccountStatus" Type="list" ListValues="Active,Inactive"/\><br>
 
-Add to the platform library:
- - Copy the .ini and .xml files into the platformlib directory.
- - Run 0-list-platform-library.sh to ensure it appears in the list.
- - Run 2-import-from-platformlib.sh to import it into the Vault.
-Manual import:
- - Create a zipfile containing the modified .ini and .xml file and import to your Vault.
+ - Add to the platform library:
+   - Copy the .ini and .xml files into the platformlib directory.
+   - Run 0-list-platform-library.sh to ensure it appears in the list.
+   - Run 2-import-from-platformlib.sh to import it into the Vault.
+ - Manual import:
+   - Create a zipfile containing the modified .ini and .xml file and import to your Vault.
 
-- Verify the new target platform appears in the appropriate category, e.g. Databases
-- Click Edit and navigate to:<br>
-  Target Account Platform->UI & Workflows->Properties->Optional<br>
-  and verify the four properties you added are there.
+ - Verify the new target platform appears in the appropriate category, e.g. Databases
+ - Click Edit and navigate to:<br>
+   Target Account Platform->UI & Workflows->Properties->Optional<br>
+   and verify the four properties you added are there.
 
 ## Step 3: “Configure accounts and groups for dual account support” 
  - Create two accounts that have the PlatformID of the target account platform created in step 2. 
