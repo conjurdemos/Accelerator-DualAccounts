@@ -1,13 +1,7 @@
 #!/bin/bash
 
 source env-vars.sh
-
-ROTATIONAL_GROUP_PLATFORM_ID=RotationGroup-Default
-GROUP_NAME=MySQL-AcctGroup
-ACCOUNT_PLATFORM_ID=MySQL-Dual
-SAFE_NAME=TestDualAccounts
-ACCOUNT_NAME1=MySQL-DualAccts1
-ACCOUNT_NAME2=MySQL-DualAccts2
+source ./dual-account-config.sh
 
 main() {
   dump_platforms

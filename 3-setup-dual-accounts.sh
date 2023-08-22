@@ -1,15 +1,7 @@
 #!/bin/bash
 
-source ./demo-vars.sh
-
-# Platform parameters
-ACCOUNT_PLATFORM_ID=MySQL-DA
-SAFE_NAME=TestDualAccounts
-SAFE_ADMIN=jody.hunt@cyberark.cloud.1741
-ACCOUNT_NAME1=MySQL-DualAccts1
-ACCOUNT_NAME2=MySQL-DualAccts2
-GROUP_NAME=MySQL-AcctGroup
-GROUP_PLATFORM_ID=$rotationGroupPlatformId
+source ./env-vars.sh
+source ./dual-account-config.sh
 
 main() {
   create_safe
