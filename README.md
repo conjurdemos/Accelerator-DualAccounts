@@ -45,6 +45,19 @@ The scripts in this Dual Accounts Accelerator automate tasks required to create 
  - 4-dump-dual-accounts.sh - dumps json records dual accounts specified in dual-account-params.sh.
  - 5-delete-dual-accounts.sh - deletes dual accounts, account group and safe specified in dual-account-params.sh.
 
+## 6) Test Dual Account password rotation:
+ - In PVWA, click on one of the two accounts (doesn’t matter which one) and click “Change”
+ - Click “Open” and the account will open with the classic UI.
+ - Under Account Details, click “Change”, the click “Ok” to trigger immediate password change for the entire group.
+ - Monitor the change process clicking Refresh until you see the DualAccountStatus change.
+ - Start your timer and when the GracePeriod has elapsed, check to that the Inactive account’s password has changed in the account and target system.
+ - Correct any errors and try again.
+   - Typical errors are:
+     - Incorrect or missing account properties: address, database, port, user
+     - Incorrect CPM driver for the target system.
+     - Port not open to the CPM’s IP address.<br>
+       Note that in Privilege Cloud, the IP address displayed in "System Health->CPM and Accounts Discovery" is a private IP address.
+
 # Manual Dual Accounts Configuration Overview
 
 Dual Accounts are currently documented under the Central Credential Provider:
@@ -93,7 +106,7 @@ GracePeriod=6<br>
 \<Property Name="DualAccountStatus" Type="list" ListValues="Active,Inactive"/\><br>
 \</Optional\><br>
 
- - Add to the platform library:
+ - Add to the platform library and auto-import:
    - Copy the .ini and .xml files into the platformlib directory.
    - Run 0-list-platform-library.sh to ensure it appears in the list.
    - Run 2-import-from-platformlib.sh to import it into the Vault.
@@ -120,7 +133,7 @@ Policy-\<base-platform-id\>.xml<br>
 \<Property Name="Index" Type="Numeric"/\><br>
 \<Property Name="DualAccountStatus" Type="list" ListValues="Active,Inactive"/\><br>
 
- - Add to the platform library:
+ - Add to the platform library and auto-import:
    - Copy the .ini and .xml files into the platformlib directory.
    - Run 0-list-platform-library.sh to ensure it appears in the list.
    - Run 2-import-from-platformlib.sh to import it into the Vault.
@@ -148,19 +161,8 @@ Policy-\<base-platform-id\>.xml<br>
    - Set Index property to: 2
    - Set DualAccountStatus property to: Inactive
 
-## Step 4: Test Dual Account password rotation
- - In PVWA, click on one of the two accounts (doesn’t matter which one) and click “Change”
- - Click “Open” and the account will open with the classic UI.
- - Under Account Details, click “Change”, the click “Ok” to trigger immediate password change for the entire group.
- - Monitor the change process clicking Refresh until you see the DualAccountStatus change.
- - Start your timer and when the GracePeriod has elapsed, check to that the Inactive account’s password has changed in the account and target system.
- - Correct any errors and try again.
-   - Typical errors are:
-     - Incorrect or missing account properties: address, database, port, user
-     - Incorrect CPM driver for the target system.
-     - Port not open to the CPM’s IP address.<br>
-       Note that in Privilege Cloud, the IP address displayed in "System Health->CPM and Accounts Discovery" is a private IP address.
-
+## Step 4: Test dual accounts password rotation
+ - [See above](https://github.com/conjurdemos/Accelerator-DualAccounts#step-4-test-dual-account-password-rotation)
 ## Why are Dual Accounts necessary?
 
  - Secret rotations are a fundamental security best-practice. But if care is not taken, rotating secrets can lead to application outages. If an application holds onto a secret value, it won’t work once it’s been rotated in the target database, service, server, etc. This could lock the application out of the target system.
