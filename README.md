@@ -77,7 +77,7 @@ Policy-SampleGroup.xml<br>
  - Modify the .ini file:
    - Change the PolicyID and PolicyName to something meaningful, e.g. DualAccountsPolicy
    - Change the PolicyType to RotationalGroup (capitalization is significant)
- - Add the following lines at the end of the file, no leading or trailing spaces:
+ - Add the following lines at the end of the file, no leading or trailing spaces:<br>
 [ADExtraInfo]<br>
 [ChangeTask]<br>
 [ExtraInfo]<br>
@@ -85,7 +85,7 @@ GracePeriod=6<br>
 
 - NOTE: The GracePeriod value represents minutes and can be whatever you want. But pro tip – make the initial value low for testing, then change to a longer duration once rotation is functioning properly.
 - Modify the .xml file:
-  - Replace \<Optional /\> with the following block:
+  - Replace \<Optional /\> with the following block:<br>
 \<Optional\><br>
 \<Property Name=”CurrInd" /\><br>
 \<Property Name="VirtualUserName" /\><br>
@@ -106,52 +106,61 @@ Manual import:
   and verify the four properties you added are there.
 
 ## Step 2: “Configure the object’s platform for dual account support”
-Export the the target platform to a local zipfile & unzip to create two files:
+ - Export the the target platform to a local zipfile & unzip to create two files:
 <base-platform-id>.ini
 <base-platform-id>.xml
-Modify the .ini file:
-This is the metadata that governs the behavior for any account created for this platform type:
-password change/verification/reconciliation parameters, drivers, etc. 
-Modify the PlatformID & PolicyName to something indicative, e.g. MySQL-Dual
-Modify the .xml file:
-This is the metadata that (among other things) specifies the required and optional properties of an account.
-Modify the PlatformID to match the one in the .ini file
-Add the following properties. Making them optional allows using this platform for non-dual account purposes:
-<Property Name="VirtualUserName" />
-<Property Name="Index" />
-<Property Name="DualAccountStatus" />
+ - Modify the .ini file:<br>
+   This is the metadata that governs the behavior for any account created for this platform type:
+   - password change/verification/reconciliation parameters, drivers, etc. 
+   - Modify the PlatformID & PolicyName to something indicative, e.g. MySQL-Dual
+ - Modify the .xml file:<br>
+   This is the metadata that (among other things) specifies the required and optional properties of an account.
+   - Modify the PlatformID to match the one in the .ini file
+   - Add the following properties. Making them optional allows using this platform for non-dual account purposes:<br>
+\<Property Name="VirtualUserName" /\><br>
+\<Property Name="Index" /\><br>
+\<Property Name="DualAccountStatus" /\><br>
 
-Create a zipfile containing the modified .ini and .xml file and import to your Vault.
-Verify the new target platform appears in the appropriate category, e.g. Databases
+Add to the platform library:
+ - Copy the .ini and .xml files into the platformlib directory.
+ - Run 0-list-platform-library.sh to ensure it appears in the list.
+ - Run 2-import-from-platformlib.sh to import it into the Vault.
+Manual import:
+ - Create a zipfile containing the modified .ini and .xml file and import to your Vault.
+
+- Verify the new target platform appears in the appropriate category, e.g. Databases
+- Click Edit and navigate to:<br>
+  Target Account Platform->UI & Workflows->Properties->Optional<br>
+  and verify the four properties you added are there.
 
 ## Step 3: “Configure accounts and groups for dual account support” 
-Create two accounts that have the PlatformID of the target account platform created in step 2. 
-The accounts must be in the same safe, and the safe must have a CPM assigned to it.
-Using the classic UI, you must modify each account in a dual account pair.
-Open one of the accounts in the PVWA classic UI:
-Under the CPM tab, click “Create New” a specify a unique account group name for the pair of accounts with the Rotational Group as its platform.
-Choose a VirtualUserName to represent this pair of accounts.
-The VirtualUserName is effectively the Account Name of the pair of accounts.
-It appears in Conjur variable names in place of either account name. It is used in CP queries to retrieve the currently active account properties.
-Set Index property to: 1
-Set DualAccountStatus property to: Active
-Open the other account in the PVWA classic UI:
-Under the CPM tab, click “Modify” and select the group name you created for the first account.
-Set VirtualUserName to the same name as in the first account
-Set Index property to: 2
-Set DualAccountStatus property to: Inactive
+ - Create two accounts that have the PlatformID of the target account platform created in step 2. 
+ - The accounts must be in the same safe, and the safe must have a CPM assigned to it.
+ - Using the classic UI, you must modify each account in a dual account pair.
+ - Open one of the accounts in the PVWA classic UI:
+   - Under the CPM tab, click “Create New” a specify a unique account group name for the pair of accounts with the Rotational Group as its platform.
+   - Choose a VirtualUserName to represent this pair of accounts.<br>
+     The VirtualUserName is effectively the Account Name of the pair of accounts. It appears in Conjur variable names in place of either account name. It is used in CP queries to retrieve the currently active account properties.
+   - Set Index property to: 1
+   - Set DualAccountStatus property to: Active
+ - Open the other account in the PVWA classic UI:
+   - Under the CPM tab, click “Modify” and select the group name you created for the first account.
+   - Set VirtualUserName to the same name as in the first account
+   - Set Index property to: 2
+   - Set DualAccountStatus property to: Inactive
 
 ## Step 4: Test Dual Account password rotation
-In PVWA, click on one of the two accounts (doesn’t matter which one) and click “Change”
-Click “Open” and the account will open with the classic UI.
-Under Account Details, click “Change”, the click “Ok” to trigger immediate password change for the entire group.
-Monitor the change process clicking Refresh until you see the DualAccountStatus change.
-Start your timer and when the GracePeriod has elapsed, check to that the Inactive account’s password has changed in the account and target system.
-Correct any errors and try again.
-Typical errors are:
-Incorrect or missing account properties: address, database, port, user
-Port not open to the CPM’s IP address. To find that in Privilege Cloud, navigate to System Health->CPM and Accounts Discovery
-Incorrect CPM driver for the target system.
+ - In PVWA, click on one of the two accounts (doesn’t matter which one) and click “Change”
+ - Click “Open” and the account will open with the classic UI.
+ - Under Account Details, click “Change”, the click “Ok” to trigger immediate password change for the entire group.
+ - Monitor the change process clicking Refresh until you see the DualAccountStatus change.
+ - Start your timer and when the GracePeriod has elapsed, check to that the Inactive account’s password has changed in the account and target system.
+ - Correct any errors and try again.
+   - Typical errors are:
+     - Incorrect or missing account properties: address, database, port, user
+     - Incorrect CPM driver for the target system.
+     - Port not open to the CPM’s IP address.<br>
+       Note that in Privilege Cloud, the IP address displayed in "System Health->CPM and Accounts Discovery" is a private IP address.
 
 ## Why are Dual Accounts necessary?
 
