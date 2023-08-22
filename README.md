@@ -38,10 +38,10 @@ The scripts in this Dual Accounts Accelerator automate tasks required to create 
   - dual-account-params.sh - **Must be edited** to provide specific values for safe, account names, properties, etc.
 
 ### 4) Import platforms:
- - 2-import-from-platformlib.sh - imports a specified platform ID into the Vault. Prompts for Platform ID if not provided on the command line. The 0-list-platform-library.sh script lists platform IDs available for importing.
+ - 2-import-from-platformlib.sh - imports a specified platform ID into the Vault. Prompts for Platform ID if not provided on the command line. The 0-list-platform-library.sh script lists platform IDs available for importing (see step 1 above).
 
 ### 5) Manage dual accounts:
- - 3-setup-dual-accounts.sh - currently only supports creation of database accounts. 
+ - 3-setup-dual-accounts.sh - currently only supports creation of database accounts. Automates creation of safe, accounts and account group for a pair of dual accounts specified in dual-account-params.sh.
  - 4-dump-dual-accounts.sh - dumps json records dual accounts specified in dual-account-params.sh.
  - 5-delete-dual-accounts.sh - deletes dual accounts, account group and safe specified in dual-account-params.sh.
 
@@ -71,36 +71,39 @@ The documentation calls for using the Private Ark Client to modify the CurrInd v
 Below are more detailed instructions for each step above.
 
 ## Step 1: “Configure a rotational group platform”
-Under Groups, activate the Sample Password Group Platform, export it to a local zipfile & unzip to create two files:
-Policy-SampleGroup.ini
-Policy-SampleGroup.xml
-Modify the .ini file:
-Change the PolicyID and PolicyName to something meaningful, e.g. DualAccountsPolicy
-Change the PolicyType to RotationalGroup (capitalization is significant)
-Add the following lines at the end of the file, no leading or trailing spaces:
-[ADExtraInfo]
-[ChangeTask]
-[ExtraInfo]
-GracePeriod=6
-NOTE: The GracePeriod value represents minutes and can be whatever you want. But pro tip – make the initial value low for testing, then change to a longer duration once rotation is functioning properly.
-Modify the .xml file:
-Replace <Optional /> with the following block:
-<Optional>
-<Property Name=”CurrInd" />
-<Property Name="VirtualUserName" />
-<Property Name="Index" />
-<Property Name="DualAccountStatus" />
-</Optional>
+ - Under Groups, activate the Sample Password Group Platform, export it to a local zipfile & unzip to create two files:
+Policy-SampleGroup.ini<br>
+Policy-SampleGroup.xml<br>
+ - Modify the .ini file:
+   - Change the PolicyID and PolicyName to something meaningful, e.g. DualAccountsPolicy
+   - Change the PolicyType to RotationalGroup (capitalization is significant)
+ - Add the following lines at the end of the file, no leading or trailing spaces:
+[ADExtraInfo]<br>
+[ChangeTask]<br>
+[ExtraInfo]<br>
+GracePeriod=6<br>
 
-Automation:
+- NOTE: The GracePeriod value represents minutes and can be whatever you want. But pro tip – make the initial value low for testing, then change to a longer duration once rotation is functioning properly.
+- Modify the .xml file:
+  - Replace <Optional /> with the following block:
+<Optional><br>
+<Property Name=”CurrInd" /><br>
+<Property Name="VirtualUserName" /><br>
+<Property Name="Index" /><br>
+<Property Name="DualAccountStatus" /><br>
+</Optional><br>
+
+Add to the platform library:
  - Copy the .ini and .xml files into the platformlib directory.
- - Run 1-list-platform-library.sh to ensure it appears in the list.
+ - Run 0-list-platform-library.sh to ensure it appears in the list.
  - Run 2-import-from-platformlib.sh to import it into the Vault.
-Manual:
+Manual import:
  - Create a zipfile containing the modified .ini and .xml file and import to your Vault.
 
-Verify the new platform appears under Rotational Groups and the Grace Period value is displayed.
-Click Edit and navigate to Target Account Platform->UI & Workflows->Properties->Optional  and verify the four properties you added are there.
+- Verify the new platform appears under Rotational Groups and the Grace Period value is displayed.
+- Click Edit and navigate to:<br>
+  Target Account Platform->UI & Workflows->Properties->Optional<br>
+  and verify the four properties you added are there.
 
 ## Step 2: “Configure the object’s platform for dual account support”
 Export the the target platform to a local zipfile & unzip to create two files:
