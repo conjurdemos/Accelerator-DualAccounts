@@ -27,6 +27,7 @@
 
 The scripts in this Dual Accounts Accelerator automate tasks required to create Dual Accounts in Self-Hosted or Privilege Cloud vaults. The Accelerator provides out-of-box support for the Platforms in the ./platformlib directory (the “Platform Library”). Support for other Platforms can be added following Step 2 in in the manual configuration steps below.
 
+- env-vars.sh - defines Self-Host or Privilege Cloud mode and URLs to their installation. It also prompts for the name and password of the Vault admin user identity under which to run the scripts.
 - 0-export-all-db-platforms.sh - example script showing how to export all platforms of a given systemType. Script can be modified as needed to export platforms to zipfiles then edited following the manual configuration steps below to extend dual account support to other platforms.
  - 1-list-platform-library.sh - lists platform IDs and System Types for all platforms in the platformlib directory.
  - 2-import-from-platformlib.sh - imports a specified platform ID into the Vault.
