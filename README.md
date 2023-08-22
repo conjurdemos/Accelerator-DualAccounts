@@ -34,21 +34,21 @@ The steps below map to the steps in documentation. The steps in the slides devia
 
 Each step below has its own slide with more detailed instructions.
 
-** Step 1: “Configure a rotational group platform” **
+**Step 1: “Configure a rotational group platform”**
 A Rotational Group Platform is an Account Group Platform with important differences:
  - Its PlatformType is RotationalGroup
  - It contains an additional password change parameter called GracePeriod
  - It defines additional properties representing the state of individual sets of dual accounts: CurrInd, Index, VirtualUserName, DualAccountStatus
 There is no need for more than one Rotational Group Platform unless you want to have groups with different Grace Periods.
 
-** Step 2: “Configure the object’s platform for dual account support” **
+**Step 2: “Configure the object’s platform for dual account support”**
 This entails modifying a target account platform to add three additional properties: Index, VirtualUserName, DualAccountStatus
 
-** Step3: “Configure accounts and groups for dual account support” **
+**Step3: “Configure accounts and groups for dual account support”**
 To see the CPM tab and create groups, the safe must have a CPM assigned to it.
 Account groups are not first-class UI objects in PVWA. They do not have their own pages for managing their lifecycle. In PVWA, they only appear in the classic UI on account pages under the CPM tab. 
 
-** Step 4: “Set the index of the group object” **
+**Step 4: “Set the index of the group object”**
 The documentation calls for using the Private Ark Client to modify the CurrInd value of a group. Fortunately, this step does not appear necessary, given that you cannot use the Private Ark Client with Privilege Cloud.
 
 ## Step 1: “Configure a rotational group platform”
@@ -131,10 +131,10 @@ Incorrect CPM driver for the target system.
  - Applications should always fetch a secret from a secrets management system right before using it. That helps guarantee the application has an up-to-date secret, but it is not sufficient for several reasons:
    - Some applications require continuous connectivity.
    - Some databases will break a connection on password change.
-   - Due to syncing and caching in secrets management systems, there can be unavoidable lag time (latency) between when the password is changed, and when the new value is available to the application.
- - One method to counter this is to coordinate rotations during a precisely timed change window. Most organizations dislike this idea: it’s inconvenient, definitely not foolproof, and some applications can’t be brought down or paused for a change window.
+   - Due to syncing and caching in secrets management systems, there can be unavoidable lag time (latency) between the moment the password is changed, and when the new value is available to the application.
+ - One method to address this is to coordinate rotations during a precisely timed change window. But most organizations dislike this idea: it’s inconvenient, definitely not foolproof, and some applications can’t be brought down or paused for a change window.
  - A more automated, simple and foolproof solution is Dual Accounts, supported by the CyberArk Vault.
  - Dual Accounts are similar to a DevOps application deployment model call [Blue/Green Deployments](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment).
- - See [this explainer video](https://youtu.be/i122iZWKVb0) for a thorough description and demo.
+ - See [this explainer video](https://youtu.be/i122iZWKVb0) for a thorough explanation and demo of Dual Accounts.
 
 
