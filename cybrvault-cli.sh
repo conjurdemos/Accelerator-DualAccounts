@@ -1101,7 +1101,7 @@ function checkDependencies() {
     echo "The JSON query utility jq is required. Please install jq."
     all_env_set=false
   fi
-  if [[ "$IDENTITY_TENANT_URL" == "" ]]; then
+  if [[ "$IDENTITY_TENANT_URL" == "" && "$SELF_HOSTED_PAM" != "true" ]]; then
     echo
     echo "  IDENTITY_TENANT_URL must be set."
     all_env_set=false

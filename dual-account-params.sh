@@ -5,9 +5,9 @@
 ACCOUNT_PLATFORM_ID=MySQL-Dual
 
 # Rotational group platform ID 
-ROTATIONAL_GROUP_PLATFORM_ID=RotationGroup-Default
+ROTATIONAL_GROUP_PLATFORM_ID=RotationalGroup-Default
 
-# Unique name of group containing above dual accounts
+# Unique name of group to be created to contain above dual accounts
 GROUP_NAME=MySQL-AcctGroup
 
 # Name of safe that will contain both accounts.
@@ -23,7 +23,7 @@ SAFE_CPM_NAME=PasswordManager1
 SAFE_ADMIN=Admin1
 
 # Common account properties
-ACCOUNT_ADDRESS=192.168.1.67
+ACCOUNT_ADDRESS=192.168.1.1
 ACCOUNT_DB=petclinic
 ACCOUNT_PORT=3306
 ACCOUNT_VIRTUALUSERNAME=MySQL-VU

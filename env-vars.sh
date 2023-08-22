@@ -1,19 +1,24 @@
 # Edit this file substituting correct values for '<<YOUR_VALUE_HERE>>'
 
 # set to 'true' for self-hosted PAM, 'false' for Pcloud
-export SELF_HOSTED_PAM="true"
+export SELF_HOSTED_PAM="false"
 
 if $SELF_HOSTED_PAM; then
   ENV_TAG="Self-Hosted"
-  SELF_HOSTED_BASE_URL=https://comp-server
+
+  # Base URL of your CyberArk Identity tenant
+  #  e.g. https://myonpremserver.mycompany.com
+  SELF_HOSTED_BASE_URL='<<YOUR_VALUE_HERE>>'
 else
   ENV_TAG="Pcloud"
 
-  # URL of your CyberArk Identity tenant
-  export IDENTITY_TENANT_URL=https://aao4987.id.cyberark.cloud
+  # Base URL of your CyberArk Identity tenant
+  #  e.g. https://aao4987.id.cyberark.cloud
+  export IDENTITY_TENANT_URL='<<YOUR_VALUE_HERE>>'
 
-  # URL of your CyberArk Privilege Cloud tenant
-  PCLOUD_TENANT_URL=https://cybr-secrets.cyberark.cloud
+  # BaseURL of your CyberArk Privilege Cloud tenant
+  #  e.g. https://mypcloud.cyberark.cloud
+  PCLOUD_TENANT_URL='<<YOUR_VALUE_HERE>>'
 fi
 
 ###########################################################

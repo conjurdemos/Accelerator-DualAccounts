@@ -84,7 +84,7 @@ The documentation calls for using the Private Ark Client to modify the CurrInd v
 Below are more detailed instructions for each step above.
 
 ## Step 1: “Configure a rotational group platform”
- - Under Groups, activate the Sample Password Group Platform, export it to a local zipfile & unzip to create two files:
+ - Under Groups, activate the Sample Password Group Platform, export it to a local zipfile & unzip to create two files:<br>
 Policy-SampleGroup.ini<br>
 Policy-SampleGroup.xml<br>
  - Modify the .ini file:
