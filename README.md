@@ -7,24 +7,31 @@
 - Here is a [detailed explanation for the motivation of Dual Accounts](https://github.com/conjurdemos/Accelerator-DualAccounts#why-are-dual-accounts-necessary).
 
 ## Prerequisites
- - A demo host to run the scripts in this repo: a MacOS or Linux VM environment with bash shell support, jq installed and IPV4 network access to the CyberArk PVWA APIs.
- - Make sure all scripts are executable. Run: chmod -R +x *.sh
+ - A demo host to run the scripts in this repo:
+   - a MacOS or Linux VM environment with bash shell support;
+   - jq installed;
+   - IPV4 network access to the CyberArk PVWA APIs.
+ - Make sure all scripts are executable.
+   - Run: chmod -R +x *.sh
  - The scripts work with either Privilege Cloud or Self-Hosted PAM:
- - For Privilege Cloud:
-   - Admin access to a NON-PRODUCTION Cyberark Identity tenant
-   - Admin access to a NON-PRODUCTION CyberArk Privilege Cloud tenant
-   - A CyberArk Identity service user & oauth2 confidential client with the Privilege Cloud Admin role.
- - For Self-Hosted PAM:
-   - Admin access to a NON-PRODUCTION CyberArk Vault.
+   - For Privilege Cloud:
+     - Admin access to a NON-PRODUCTION Cyberark Identity tenant
+     - Admin access to a NON-PRODUCTION CyberArk Privilege Cloud tenant
+     - A CyberArk Identity service user & oauth2 confidential client with the Privilege Cloud Admin role.
+   - For Self-Hosted PAM:
+     - Admin access to a NON-PRODUCTION CyberArk Vault.
 
 ![Dual Accounts Object Model](https://github.com/conjurdemos/Accelerator-DualAccounts/blob/main/DualAccountsObjectModel.png?raw=true)
 
 # Dual Accounts Automation
 
- - The scripts in this Dual Accounts Accelerator automate the tasks required to create Dual Accounts in Self-Hosted or Privilege Cloud vaults.
- - The Accelerator provides out-of-box support for the Platforms in the ./platformlib directory (the “Platform Library”).
- - Support for other Platforms can be added following Step 2 in in the manual configuration steps below.
+The scripts in this Dual Accounts Accelerator automate tasks required to create Dual Accounts in Self-Hosted or Privilege Cloud vaults. The Accelerator provides out-of-box support for the Platforms in the ./platformlib directory (the “Platform Library”). Support for other Platforms can be added following Step 2 in in the manual configuration steps below.
 
+- 0-export-all-db-platforms.sh - example script showing how to export all platforms of a given systemType. Script can be modified as needed to export platforms to zipfiles then edited following the manual configuration steps below to extend dual account support to other platforms.
+ - 1-list-platform-library.sh - lists platform IDs and System Types for all platforms in the platformlib directory.
+ - 2-import-from-platformlib.sh - imports a specified platform ID into the Vault.
+ - 3-setup-dual-accounts.sh - currently only supports creation of database accounts. Must be edited to provide specific values for safe, account names, properties, etc.
+ - 4-dump-dual-accounts.sh - dumps json records for a given pair of dual accounts.
 
 # Manual Dual Accounts Configuration Overview
 
