@@ -85,13 +85,13 @@ GracePeriod=6<br>
 
 - NOTE: The GracePeriod value represents minutes and can be whatever you want. But pro tip – make the initial value low for testing, then change to a longer duration once rotation is functioning properly.
 - Modify the .xml file:
-  - Replace <Optional /> with the following block:
-<Optional><br>
-<Property Name=”CurrInd" /><br>
-<Property Name="VirtualUserName" /><br>
-<Property Name="Index" /><br>
-<Property Name="DualAccountStatus" /><br>
-</Optional><br>
+  - Replace \<Optional /\> with the following block:
+\<Optional\><br>
+\<Property Name=”CurrInd" /\><br>
+\<Property Name="VirtualUserName" /\><br>
+\<Property Name="Index" /\><br>
+\<Property Name="DualAccountStatus" /\><br>
+\</Optional\><br>
 
 Add to the platform library:
  - Copy the .ini and .xml files into the platformlib directory.
