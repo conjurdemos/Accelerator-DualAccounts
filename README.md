@@ -15,16 +15,15 @@
 
 ## Why are Dual Accounts necessary?
 
- - Secret rotations are a fundamental security best-practice. But if care is not taken, rotating secrets can lead to application outages.
- - If an application holds onto a secret value, it won’t work once it’s been rotated in the target database, service, server, etc. This could lock the application out of the target system.
- - Applications should always fetch the secret from its source (CP, Conjur, Secrets Hub…) right before using it. That helps guarantee the application has an up-to-date secret, but is not sufficient:
+ - Secret rotations are a fundamental security best-practice. But if care is not taken, rotating secrets can lead to application outages. If an application holds onto a secret value, it won’t work once it’s been rotated in the target database, service, server, etc. This could lock the application out of the target system.
+ - Applications should always fetch a secret from a secrets management system right before using it. That helps guarantee the application has an up-to-date secret, but it is not sufficient for several reasons:
    - Some applications require continuous connectivity.
    - Some databases will break a connection on password change.
-   - With some secrets management solutions, there is unavoidable lag time (latency) between when the password is changed, and when the new value is available to the application.
- - One method to counter this is to coordinate rotations during a precisely timed change window. Most organizations dislike this idea, it’s inconvenient, definitely not foolproof, and some applications can’t be brought down or paused for a change window.
+   - Due to syncing and caching in secrets management systems, there can be unavoidable lag time (latency) between when the password is changed, and when the new value is available to the application.
+ - One method to counter this is to coordinate rotations during a precisely timed change window. Most organizations dislike this idea: it’s inconvenient, definitely not foolproof, and some applications can’t be brought down or paused for a change window.
  - A more automated, simple and foolproof solution is Dual Accounts, supported by the CyberArk Vault.
- - Dual Accounts are similar to a DevOps application deployment model call [Blue/Green Deployments](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment).
- - See [this explainer video](https://youtu.be/i122iZWKVb0) for a thorough description and demo.
+ - Dual Accounts are similar to a DevOps application deployment model call [Blue/Green Deployments](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment){:target="_blank"}.
+ - See [this explainer video](https://youtu.be/i122iZWKVb0){:target="_blank"} for a thorough description and demo.
 
 # Dual Accounts Automation
 
