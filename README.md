@@ -162,7 +162,8 @@ Policy-\<base-platform-id\>.xml<br>
    - Set DualAccountStatus property to: Inactive
 
 ## Step 4: Test dual accounts password rotation
- - [See above](https://github.com/conjurdemos/Accelerator-DualAccounts#step-4-test-dual-account-password-rotation)
+ - [See above](https://github.com/conjurdemos/Accelerator-DualAccounts#6-test-dual-account-password-rotation)
+
 ## Why are Dual Accounts necessary?
 
  - Secret rotations are a fundamental security best-practice. But if care is not taken, rotating secrets can lead to application outages. If an application holds onto a secret value, it won’t work once it’s been rotated in the target database, service, server, etc. This could lock the application out of the target system.
