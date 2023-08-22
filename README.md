@@ -87,10 +87,10 @@ GracePeriod=6<br>
 - Modify the .xml file:
   - Replace \<Optional /\> with the following block:<br>
 \<Optional\><br>
-\<Property Name=”CurrInd" /\><br>
-\<Property Name="VirtualUserName" /\><br>
-\<Property Name="Index" /\><br>
-\<Property Name="DualAccountStatus" /\><br>
+\<Property Name=”CurrInd" Type="Numeric" /\><br>
+\<Property Name="VirtualUserName" Type="Text"/\><br>
+\<Property Name="Index" Type="Numeric"/\><br>
+\<Property Name="DualAccountStatus" Type="list" ListValues="Active,Inactive"/\><br>
 \</Optional\><br>
 
  - Add to the platform library:
@@ -107,19 +107,18 @@ GracePeriod=6<br>
 
 ## Step 2: “Configure the object’s platform for dual account support”
  - Export the the target platform to a local zipfile & unzip to create two files:<br>
-\<base-platform-id\>.ini<br>
-\<base-platform-id\>.xml<br>
+Policy-\<base-platform-id\>.ini<br>
+Policy-\<base-platform-id\>.xml<br>
  - Modify the .ini file:<br>
-   This is the metadata that governs the behavior for any account created for this platform type:
-   - password change/verification/reconciliation parameters, drivers, etc. 
+   This is the metadata that governs the behavior for any account created for this platform type: password change/verification/reconciliation parameters, drivers, etc. 
    - Modify the PlatformID & PolicyName to something indicative, e.g. MySQL-Dual
  - Modify the .xml file:<br>
    This is the metadata that (among other things) specifies the required and optional properties of an account.
    - Modify the PlatformID to match the one in the .ini file
    - Add the following properties. Making them optional allows using this platform for non-dual account purposes:<br>
-\<Property Name="VirtualUserName" /\><br>
-\<Property Name="Index" /\><br>
-\<Property Name="DualAccountStatus" /\><br>
+\<Property Name="VirtualUserName" Type="Text"/\><br>
+\<Property Name="Index" Type="Numeric"/\><br>
+\<Property Name="DualAccountStatus" Type="list" ListValues="Active,Inactive"/\><br>
 
 Add to the platform library:
  - Copy the .ini and .xml files into the platformlib directory.
