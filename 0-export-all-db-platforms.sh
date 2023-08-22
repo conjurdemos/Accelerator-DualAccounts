@@ -4,8 +4,24 @@
 
 source ./env-vars.sh
 
-# Get all Platform Ids of systemType Database
-PLATFORM_IDS=$(./cybrvault-cli.sh platforms_get | jq -r '.Platforms[] | select(.general.systemType=="Database").general.id')
+mkdir -p ./exported_zipfiles
+
+echo "Platform system types in vault:"
+./cybrvault-cli.sh platforms_get | jq -r '[.Platforms[].general.systemType] | unique | .[]'
+			# jq explainer: put all systemTypes in array, uniqueify, return elements of uniqueified array
+echo
+echo
+
+
+SYSTEMTYPE=Database
+
+echo "Exporting all Platform Ids of systemType $SYSTEMTYPE:"
+printf -v query '.Platforms[] | select(.general.systemType=="%s")' $SYSTEMTYPE
+PLATFORM_IDS=$(./cybrvault-cli.sh platforms_get | jq -r "$query")
+
+echo $PLATFORM_IDS
+
+exit
 
 for platId in $PLATFORM_IDS; do
   echo "Exporting $platId..."
@@ -20,6 +36,3 @@ exit
 # Get all Platform Names
 #./cybrvault-cli.sh platforms_get | jq -r '.Platforms[].general.name'
 
-# Get all Platform systemTypes 
-#./cybrvault-cli.sh platforms_get | jq -r '[.Platforms[].general.systemType] | unique | .[]'
-			# jq explainer: put all systemTypes in array, uniqueify, return elements of uniqueified array
