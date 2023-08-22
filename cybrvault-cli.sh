@@ -35,6 +35,7 @@ showUsage() {
   echo "  Safe Account Group commands:"
   echo "    $0 safe_groups_get <safe-name>"
   echo "    $0 safe_group_create <safe-name> <group-name> <group-platform-name>"
+  echo "    $0 safe_group_delete <numeric-group-id>"
   echo "    $0 safe_group_member_add <numeric-group-id> <numeric-account-id>"
   echo "    $0 safe_group_members_get <numeric-group-id>"
   echo "    $0 safe_group_member_delete <numeric-group-id> <numeric-account-id>"
@@ -148,6 +149,14 @@ main() {
 	groupName=$(urlify "$3")
 	groupPlatformId=$(urlify "$4")
 	;;
+    safe_group_delete)
+	if [[ $# != 2 ]]; then
+	  echo "Incorrect number of arguments."
+	  showUsage
+	fi
+	command=$1
+	groupId=$2
+	;;
     safe_group_member_add | safe_group_member_delete)
 	if [[ $# != 3 ]]; then
 	  echo "Incorrect number of arguments."
@@ -173,6 +182,7 @@ main() {
 	command=$1
 	safeName=$(urlify "$2")
 	accountName=$(urlify "$3")
+	INTERACTIVE=true
 	;;
     account_create_db_dual)
 	if [[ $# != 12 ]]; then
@@ -466,7 +476,7 @@ function safe_create() {
 
   # cpmName is optional
   if [[ "$cpmName" != "" ]]; then
-    printf -v cpmKeyValue '\"managingCPM\": \"%s\", \' $cpmName
+    printf -v cpmKeyValue '\"managingCPM\": \"%s\", ' $cpmName
   else
     cpmKeyValue=" "
   fi
@@ -672,6 +682,15 @@ function safe_group_create() {
 }
 
 #####################################
+function safe_group_delete() {
+  $util_defaults
+  $CURL 				\
+	-X DELETE			\
+	-H "$authHeader"		\
+	"${VAULT_API_URL}/AccountGroups/$groupId"
+}
+
+#####################################
 function safe_group_member_add() {
   $util_defaults
   $CURL 				\
@@ -682,6 +701,15 @@ function safe_group_member_add() {
 	-d "{						\
 		\"AccountID\": \"$accountId\"		\
 	   }"
+}
+
+#####################################
+function safe_group_member_delete() {
+  $util_defaults
+  $CURL 				\
+	-X DELETE			\
+	-H "$authHeader"		\
+	"${VAULT_API_URL}/AccountGroups/$groupId/Members/$accountId"
 }
 
 #####################################

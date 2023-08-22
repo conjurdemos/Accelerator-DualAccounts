@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source env-vars.sh
-source ./dual-account-config.sh
+source ./dual-account-params.sh
 
 main() {
   dump_platforms

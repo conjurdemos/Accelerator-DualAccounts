@@ -1,6 +1,6 @@
 <Device Name="RotationalGroup">
   <Policies>
-    <Policy ID="RotatationalGroup-Default"
+    <Policy ID="RotationalGroup-Default"
 		AutoChangeOnAdd="No"
 		AutoVerifyOnAdd="No"
 		PlatformBaseID="RotationalGroup"

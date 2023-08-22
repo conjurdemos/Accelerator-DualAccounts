@@ -12,7 +12,8 @@ main() {
   PLATFORM_FILENAME_ROOT=""
   find_platform_files
   if [[ "$PLATFORM_FILENAME_ROOT" != "" ]]; then
-    echo import_platform $PLATFORM_FILENAME_ROOT
+    import_platform $PLATFORM_FILENAME_ROOT
+    ./cybrvault-cli.sh platform_details $PLATFORM_ID | jq .
   else
     echo "Platform files for PlatformID $PLATFORM_ID not found in ./platformlib/"
     echo

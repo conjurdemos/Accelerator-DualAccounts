@@ -1,11 +1,11 @@
 # Edit this file substituting correct values for '<<YOUR_VALUE_HERE>>'
 
 # set to 'true' for self-hosted PAM, 'false' for Pcloud
-export SELF_HOSTED_PAM="false"
+export SELF_HOSTED_PAM="true"
 
 if $SELF_HOSTED_PAM; then
   ENV_TAG="Self-Hosted"
-  SELF_HOSTED_BASE_URL=https://comp-server/PasswordVault/API
+  SELF_HOSTED_BASE_URL=https://comp-server
 else
   ENV_TAG="Pcloud"
 

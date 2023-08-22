@@ -27,12 +27,23 @@
 
 The scripts in this Dual Accounts Accelerator automate tasks required to create Dual Accounts in Self-Hosted or Privilege Cloud vaults. The Accelerator provides out-of-box support for the Platforms in the ./platformlib directory (the “Platform Library”). Support for other Platforms can be added following Step 2 in in the manual configuration steps below.
 
-- env-vars.sh - defines Self-Host or Privilege Cloud mode and URLs to their installation. It also prompts for the name and password of the Vault admin user identity under which to run the scripts.
-- 0-export-all-db-platforms.sh - example script showing how to export all platforms of a given systemType. Script can be modified as needed to export platforms to zipfiles then edited following the manual configuration steps below to extend dual account support to other platforms.
- - 1-list-platform-library.sh - lists platform IDs and System Types for all platforms in the platformlib directory.
- - 2-import-from-platformlib.sh - imports a specified platform ID into the Vault. Prompts for Platform ID if not provided on the command line.
- - 3-setup-dual-accounts.sh - currently only supports creation of database accounts. Must be edited to provide specific values for safe, account names, properties, etc.
- - 4-dump-dual-accounts.sh - dumps json records for a given pair of dual accounts.
+### Edit environment variables:
+  - env-vars.sh - defines Self-Host or Privilege Cloud mode and URLs to their installation. If not already set, it also prompts for the name and password of the Vault admin user identity under which to run the scripts.
+
+### Check and update the platform library
+ - 0-list-platform-library.sh - lists all platform IDs and system types currently in the platformlib directory. Any platform ID listed can be used to automate dual account creation.
+ - 1-export-all-db-platforms.sh - example script showing how to export all platforms of a given system type. As written, the script exports all DB platforms, but can be modified as needed to export platforms of other system types to zipfiles. They can then be unzipped and edited following the manual configuration steps below to implement dual account automation for other platforms.
+
+### Edit dual account parameters:
+  - dual-account-params.sh - **Must be edited** to provide specific values for safe, account names, properties, etc.
+
+### Import platforms:
+ - 2-import-from-platformlib.sh - imports a specified platform ID into the Vault. Prompts for Platform ID if not provided on the command line. The 0-list-platform-library.sh script lists platform IDs available for importing.
+
+### Manage dual accounts:
+ - 3-setup-dual-accounts.sh - currently only supports creation of database accounts. 
+ - 4-dump-dual-accounts.sh - dumps json records dual accounts specified in dual-account-params.sh.
+ - 5-delete-dual-accounts.sh - deletes dual accounts, account group and safe specified in dual-account-params.sh.
 
 # Manual Dual Accounts Configuration Overview
 
