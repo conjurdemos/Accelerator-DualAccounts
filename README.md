@@ -25,7 +25,7 @@
 
 # Dual Accounts Automation
 
-The scripts in this Dual Accounts Accelerator automate tasks required to create Dual Accounts in Self-Hosted or Privilege Cloud vaults. The Accelerator provides out-of-box support for the Platforms in the ./platformlib directory (the “Platform Library”). Support for other Platforms can be added following Step 2 in in the manual configuration steps below.
+The scripts in this Dual Accounts Accelerator automate tasks required to create Dual Accounts in Self-Hosted or Privilege Cloud vaults. The Accelerator provides out-of-box support for the Platforms in the ./platformlib directory (the “Platform Library”). Support for other Platforms can be added following step 2 below.
 
 ### 1) Edit environment variables:
   - env-vars.sh - defines Self-Hosted or Privilege Cloud mode and URLs to their installation. If not already set, it also prompts for the name and password of the CyberArk admin user identity under which to run the scripts.
