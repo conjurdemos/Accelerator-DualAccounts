@@ -4,8 +4,8 @@
 - Thoroughly document Dual Accounts support in the CyberArk Vault.
 - Provide scripts to automate provisioning of Dual Accounts.
 - Provide guidance for adding new platforms for Dual Account automation.
-- For a detailed description:
-  - https://github.com/conjurdemos/Accelerator-DualAccounts#description-of-demo
+- Here is a [detailed explanation for the motivation of Dual Accounts].
+  - (https://github.com/conjurdemos/Accelerator-DualAccounts#why-are-dual-accounts-necessary)
 
 ## Prerequisites
  - A demo host to run the scripts in this repo: a MacOS or Linux VM environment with bash shell support, jq installed and IPV4 network access to the CyberArk PVWA APIs.
@@ -17,18 +17,6 @@
    - A CyberArk Identity service user & oauth2 confidential client with the Privilege Cloud Admin role.
  - For Self-Hosted PAM:
    - Admin access to a NON-PRODUCTION CyberArk Vault.
-
-## Why are Dual Accounts necessary?
-
- - Secret rotations are a fundamental security best-practice. But if care is not taken, rotating secrets can lead to application outages. If an application holds onto a secret value, it won’t work once it’s been rotated in the target database, service, server, etc. This could lock the application out of the target system.
- - Applications should always fetch a secret from a secrets management system right before using it. That helps guarantee the application has an up-to-date secret, but it is not sufficient for several reasons:
-   - Some applications require continuous connectivity.
-   - Some databases will break a connection on password change.
-   - Due to syncing and caching in secrets management systems, there can be unavoidable lag time (latency) between when the password is changed, and when the new value is available to the application.
- - One method to counter this is to coordinate rotations during a precisely timed change window. Most organizations dislike this idea: it’s inconvenient, definitely not foolproof, and some applications can’t be brought down or paused for a change window.
- - A more automated, simple and foolproof solution is Dual Accounts, supported by the CyberArk Vault.
- - Dual Accounts are similar to a DevOps application deployment model call [Blue/Green Deployments](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment).
- - See [this explainer video](https://youtu.be/i122iZWKVb0) for a thorough description and demo.
 
 ![Dual Accounts Object Model](https://github.com/conjurdemos/Accelerator-DualAccounts/blob/main/DualAccountsObjectModel.png?raw=true)
 
@@ -137,5 +125,17 @@ Typical errors are:
 Incorrect or missing account properties: address, database, port, user
 Port not open to the CPM’s IP address. To find that in Privilege Cloud, navigate to System Health->CPM and Accounts Discovery
 Incorrect CPM driver for the target system.
+
+## Why are Dual Accounts necessary?
+
+ - Secret rotations are a fundamental security best-practice. But if care is not taken, rotating secrets can lead to application outages. If an application holds onto a secret value, it won’t work once it’s been rotated in the target database, service, server, etc. This could lock the application out of the target system.
+ - Applications should always fetch a secret from a secrets management system right before using it. That helps guarantee the application has an up-to-date secret, but it is not sufficient for several reasons:
+   - Some applications require continuous connectivity.
+   - Some databases will break a connection on password change.
+   - Due to syncing and caching in secrets management systems, there can be unavoidable lag time (latency) between when the password is changed, and when the new value is available to the application.
+ - One method to counter this is to coordinate rotations during a precisely timed change window. Most organizations dislike this idea: it’s inconvenient, definitely not foolproof, and some applications can’t be brought down or paused for a change window.
+ - A more automated, simple and foolproof solution is Dual Accounts, supported by the CyberArk Vault.
+ - Dual Accounts are similar to a DevOps application deployment model call [Blue/Green Deployments](https://www.redhat.com/en/topics/devops/what-is-blue-green-deployment).
+ - See [this explainer video](https://youtu.be/i122iZWKVb0) for a thorough description and demo.
 
 
