@@ -32,7 +32,7 @@ The scripts in this Dual Accounts Accelerator automate tasks required to create 
 
 ### 2) Check and update the platform library
  - 0-list-platform-library.sh - lists all platform IDs and system types currently in the platformlib directory. Any platform ID listed can be used to automate dual account creation.
- - 1-export-all-db-platforms.sh - example script showing how to export all platforms of a given system type. As written, the script exports all DB platforms, but can be modified as needed to export platforms of other system types to zipfiles. They can then be unzipped and edited following the [manual configuration steps](https://github.com/conjurdemos/Accelerator-DualAccounts#step-2-configure-the-objects-platform-for-dual-account-support) below to implement dual account automation for other platforms.
+ - 1-export-all-db-platforms.sh - example script showing how to export all platforms of a given system type. As written, the script exports all DB platforms, but can be modified as needed to export platforms of other system types to zipfiles. They can then be unzipped and edited following the [manual configuration steps in Step 2](https://github.com/conjurdemos/Accelerator-DualAccounts#step-2-configure-the-objects-platform-for-dual-account-support) below to implement dual account automation for other platforms.
 
 ### 3) Edit dual account parameters:
   - dual-account-params.sh - **Must be edited** to provide specific values for safe, account names, properties, etc.
