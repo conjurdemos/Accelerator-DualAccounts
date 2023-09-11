@@ -36,6 +36,7 @@ The scripts in this Dual Accounts Accelerator automate tasks required to create 
 
 ### 3) Edit dual account parameters:
   - dual-account-params.sh - **Must be edited** to provide specific values for safe, account names, properties, etc.
+  - https://github.com/conjurdemos/Accelerator-DualAccounts/blob/main/dual-account-params.sh
 
 ### 4) Import platforms:
  - 2-import-from-platformlib.sh - imports a specified platform ID into the Vault. Prompts for Platform ID if not provided on the command line. The 0-list-platform-library.sh script lists platform IDs available for importing (see step 1 above).
@@ -95,8 +96,10 @@ Policy-SampleGroup.xml<br>
 [ChangeTask]<br>
 [ExtraInfo]<br>
 GracePeriod=6<br>
-
-- NOTE: The GracePeriod value represents minutes and can be whatever you want. But pro tip – make the initial value low for testing, then change to a longer duration once rotation is functioning properly.
+<br>
+- The preceding step adds the GracePeriod parameter, which is the number of minutes that CPM will wait until changing the password of the ***Inactive*** account. This is the essence of Dual Accounts: the Grace Period allows applications time to refresh their credentials to that of the Active account, and thus are unaffected when the Inactive account password changes.
+  – **Pro tip:** Make the initial Grace Period value low for testing, then change to a longer duration once rotation is functioning properly.
+  - For guidance on how to set the production value for the Grace Period, see [Configure the password change interval for dual accounts](https://docs.cyberark.com/AAM-CP/12.1/en/Content/CP%20and%20ASCP/cv_Automatic_dual_account.htm#Configurethepasswordchangeintervalfordualaccounts)
 - Modify the .xml file:
   - Replace \<Optional /\> with the following block:<br>
 \<Optional\><br>
